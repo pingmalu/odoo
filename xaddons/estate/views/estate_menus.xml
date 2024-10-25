@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="test_menu_root" name="房产模块" action="estate_property_action" />
+</odoo>
