@@ -1,14 +1,21 @@
 from odoo import models, fields
 from datetime import timedelta
 
+
 class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Property"
 
     name = fields.Char(string="名称", required=True)
+    street = fields.Char(string="小区")
+    city = fields.Char(string="城市")
     description = fields.Text(string="描述")
     postcode = fields.Char(string="邮编")
-    date_availability = fields.Date(string="可售日期",copy=False,default=lambda self: fields.Datetime.now()+timedelta(days=90))
+    date_availability = fields.Date(
+        string="可售日期",
+        copy=False,
+        default=lambda self: fields.Datetime.now() + timedelta(days=90),
+    )
     expected_price = fields.Float(string="期望价格", required=True)
     selling_price = fields.Float(string="销售价格", readonly=True)
     bedrooms = fields.Integer(string="卧室数量", default=2)
@@ -64,3 +71,11 @@ class EstateProperty(models.Model):
     #     "estate.sale", "property_id", string="售卖信息"
     # )
 
+    def copy(self, default=None):
+        default = dict(default or {})
+        default["name"] = ("%s (copy)") % (self.name)
+        return super(EstateProperty, self).copy(default)
+
+    _sql_constraints = [
+        ('unique_name', 'UNIQUE(name)', '名称已存在'),
+    ]
