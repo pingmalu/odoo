@@ -10,7 +10,7 @@ class EstateProperty(models.Model):
     postcode = fields.Char(string="邮编")
     date_availability = fields.Date(string="可售日期",copy=False,default=lambda self: fields.Datetime.now()+timedelta(days=90))
     expected_price = fields.Float(string="期望价格", required=True)
-    selling_price = fields.Float(string="销售价格", required=True , readonly=True)
+    selling_price = fields.Float(string="销售价格", readonly=True)
     bedrooms = fields.Integer(string="卧室数量", default=2)
     living_area = fields.Integer(string="使用面积")
     facades = fields.Integer(string="面")
