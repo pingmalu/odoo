@@ -1,5 +1,5 @@
 from odoo import models, fields
-
+from datetime import timedelta
 
 class EstateProperty(models.Model):
     _name = "estate.property"
@@ -8,10 +8,10 @@ class EstateProperty(models.Model):
     name = fields.Char(string="名称", required=True)
     description = fields.Text(string="描述")
     postcode = fields.Char(string="邮编")
-    date_availability = fields.Date(string="可售日期")
+    date_availability = fields.Date(string="可售日期",copy=False,default=lambda self: fields.Datetime.now()+timedelta(days=90))
     expected_price = fields.Float(string="期望价格", required=True)
-    selling_price = fields.Float(string="销售价格")
-    bedrooms = fields.Integer(string="卧室数量")
+    selling_price = fields.Float(string="销售价格", required=True , readonly=True)
+    bedrooms = fields.Integer(string="卧室数量", default=2)
     living_area = fields.Integer(string="使用面积")
     facades = fields.Integer(string="面")
     garage = fields.Boolean(string="是否有车库")
@@ -21,3 +21,46 @@ class EstateProperty(models.Model):
         string="花园方向",
         selection=[("north", "北"), ("south", "南"), ("east", "东"), ("west", "西")],
     )
+    active = fields.Boolean(string="有效", default=True)
+    state = fields.Selection(
+        string="状态",
+        selection=[("available", "可售"), ("sold", "已售"), ("rented", "出租中")],
+        default="available",
+        copy=False,
+        required=True,
+    )
+    # property_type = fields.Selection(
+    #     string="类型",
+    #     selection=[
+    #         ("house", "房屋"),
+    #         ("apartment", "公寓"),
+    #         ("office", "办公室"),
+    #         ("store", "商铺"),
+    #         ("condo", "别墅"),
+    #         ("villa", "别墅"),
+    #         ("land", "土地"),
+    #     ],
+    # )
+    # owner_id = fields.Many2one(
+    #     "res.partner", string="业主", required=True, ondelete="restrict"
+    # )
+    # agent_id = fields.Many2one(
+    # )
+    # images = fields.Binary(string="图片")
+    # video = fields.Binary(string="视频")
+    # location_id = fields.Many2one(
+    #     "res.partner", string="位置", required=True, ondelete="restrict"
+    # )
+    # property_id = fields.Many2one(
+    #     "estate.property", string="物业", required=True, ondelete="restrict"
+    # )
+    # property_ids = fields.Many2many(
+    #     "estate.property", string="物业", required=True, ondelete="restrict"
+    # )
+    # rent_ids = fields.One2many(
+    #     "estate.rent", "property_id", string="出租信息"
+    # )
+    # sale_ids = fields.One2many(
+    #     "estate.sale", "property_id", string="售卖信息"
+    # )
+
