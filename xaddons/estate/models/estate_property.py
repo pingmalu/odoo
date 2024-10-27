@@ -36,6 +36,9 @@ class EstateProperty(models.Model):
         copy=False,
         required=True,
     )
+    property_type_id = fields.Many2one(string="类型", comodel_name="estate.property.type")
+    owner_id = fields.Many2one(string="业主", comodel_name="res.partner")
+    sale_person_id = fields.Many2one(string="销售人员", comodel_name="res.users")
     # property_type = fields.Selection(
     #     string="类型",
     #     selection=[
@@ -74,7 +77,7 @@ class EstateProperty(models.Model):
     def copy(self, default=None):
         default = dict(default or {})
         default["name"] = ("%s (copy)") % (self.name)
-        return super(EstateProperty, self).copy(default)
+        return super(self.__class__, self).copy(default)
 
     _sql_constraints = [
         ('unique_name', 'UNIQUE(name)', '名称已存在'),

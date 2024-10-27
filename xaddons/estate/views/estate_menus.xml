@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <menuitem id="test_menu_root" name="房产模块" action="estate_property_action" />
+    <menuitem id="test_menu_root" name="房产模块">
+        <!-- <menuitem id="estate_property_action_root" name="房产管理" action="estate_property_action" /> -->
+        <menuitem id="estate_property_type_action_root" name="设置">
+            <menuitem id="estate_property_type_menu_action" action="estate_property_type_action" />
+        </menuitem>
+    </menuitem>
 </odoo>

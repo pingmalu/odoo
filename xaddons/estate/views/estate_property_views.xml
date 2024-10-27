@@ -31,6 +31,7 @@
         <field name="arch" type="xml">
             <list>
                 <field name="name" />
+                <field name="property_type_id" />
                 <field name="street" />
                 <!-- <field name="active" /> -->
                 <field name="bedrooms" />
