@@ -1,10 +1,10 @@
 from odoo import models, fields
 
-class EstatePropertyType(models.Model):
-    _name = "estate.property.type"
-    _description = "房屋类型"
+class EstatePropertyTag(models.Model):
+    _name = "estate.property.tag"
+    _description = "标签"
 
-    name = fields.Char(string="房屋类型", required=True)
+    name = fields.Char(string="标签", required=True)
 
     def copy(self, default=None):
         default = dict(default or {})

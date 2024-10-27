@@ -39,6 +39,7 @@ class EstateProperty(models.Model):
     property_type_id = fields.Many2one(string="类型", comodel_name="estate.property.type")
     owner_id = fields.Many2one(string="业主", comodel_name="res.partner")
     sale_person_id = fields.Many2one(string="销售人员", comodel_name="res.users")
+    tag_id = fields.Many2many(string="标签", comodel_name="estate.property.tag")
     # property_type = fields.Selection(
     #     string="类型",
     #     selection=[
