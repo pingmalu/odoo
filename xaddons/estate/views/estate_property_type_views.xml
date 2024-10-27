@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
     <record id="estate_property_type_view_list" model="ir.ui.view">
         <field name="name">estate.property.type.list</field>
         <field name="model">estate.property.type</field>
@@ -11,7 +10,6 @@
             </list>
         </field>
     </record>
-
     <record id="estate_property_type_action" model="ir.actions.act_window">
         <field name="name">类型</field>
         <field name="res_model">estate.property.type</field>

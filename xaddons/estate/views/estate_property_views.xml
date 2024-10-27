@@ -1,30 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- <record id="estate_property_view_form" model="ir.ui.view">
+    <record id="estate_property_view_form" model="ir.ui.view">
         <field name="name">estate.property.form</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <form string="Test">
                 <sheet>
+                    <h1><field name="name" /></h1>
+                    <field name="tag_id" widget="many2many_tags" />
                     <group>
                         <group>
-                            <field name="name" />
-                            <field name="bedrooms" />
-                            <field name="living_area" />
+                            <field name="property_type_id" />
+                            <field name="date_availability" />
                         </group>
                         <group>
                             <field name="expected_price" />
+                            <field name="selling_price" />
                         </group>
                     </group>
                     <notebook>
-                        <page string="Description">
-                            <field name="description" />
+                        <page string="描述">
+                            <group>
+                                <field name="description" />
+                            </group>
+                        </page>
+                        <page string="其他">
+                            <group>
+                                <field name="owner_id" />
+                                <field name="sale_person_id" />
+                            </group>
                         </page>
                     </notebook>
                 </sheet>
             </form>
         </field>
-    </record> -->
+    </record>
     <record id="estate_property_view_list" model="ir.ui.view">
         <field name="name">estate.property.list</field>
         <field name="model">estate.property</field>
@@ -33,7 +43,7 @@
                 <field name="name" />
                 <field name="property_type_id" />
                 <field name="street" />
-                <!-- <field name="active" /> -->
+                <field name="tag_id" widget="many2many_tags" />
                 <field name="bedrooms" />
                 <field name="expected_price" />
                 <field name="living_area" />
