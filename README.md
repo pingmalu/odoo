@@ -1,2 +1,2 @@
 # odoo
-odoo18
+odoo18 地产模块
