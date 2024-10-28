@@ -65,6 +65,10 @@
                 <field name="garden" />
                 <field name="garden_orientation" />
                 <filter domain="[('bedrooms', '=', 3)]" name="bedrooms_3" string="三居室" />
+                <group expand="0" string="Group By...">
+                    <filter string="类型" domain="[]" context="{'group_by': 'property_type_id'}" icon="terp-stock_symbol-selection" />
+                    <filter string="标签" domain="[]" context="{'group_by': 'tag_id'}" icon="terp-stock_symbol-selection" />
+                </group>
             </search>
         </field>
     </record>
