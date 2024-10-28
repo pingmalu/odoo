@@ -43,12 +43,23 @@ class EstateProperty(models.Model):
     offer_ids = fields.One2many(string="报价",inverse_name="property_id", comodel_name="estate.property.offer")
 
     total_area = fields.Float(compute="_compute_total_area", string="总面积")
+    best_price = fields.Float(compute="_compute_best_price", string="最佳报价")
 
     @api.depends("living_area", "garden_area")
     def _compute_total_area(self):
         for record in self:
             record.total_area = record.living_area + record.garden_area
     
+    @api.depends("offer_ids.price")
+    def _compute_best_price(self):
+        for record in self:
+            if record.offer_ids:
+                record.best_price = max(offer.price for offer in record.offer_ids)
+            else:
+                record.best_price = 0
+
+
+
     # property_type = fields.Selection(
     #     string="类型",
     #     selection=[
