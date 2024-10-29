@@ -58,7 +58,23 @@ class EstateProperty(models.Model):
             else:
                 record.best_price = 0
 
+    @api.onchange("garden")
+    def _onchange_garden(self):
+        if self.garden:
+            self.garden_area = 10
+            self.garden_orientation = "south"
+        else:
+            self.garden_area = 0
+            self.garden_orientation = ""
 
+    @api.onchange("bedrooms")
+    def _onchange_bedrooms(self):
+        if self.bedrooms > 5:
+            warning = {
+                'title': "警告",
+                'message': "卧室数量异常"
+            }
+            return {'warning': warning}
 
     # property_type = fields.Selection(
     #     string="类型",

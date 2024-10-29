@@ -27,9 +27,11 @@
                         <page string="描述">
                             <group>
                                 <field name="description" />
+                                <field name="bedrooms" />
                                 <field name="living_area" />
-                                <field name="garden_area" />
                                 <field name="garden" />
+                                <field name="garden_area" />
+                                <field name="garden_orientation" />
                             </group>
                         </page>
                         <page string="其他">
