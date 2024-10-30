@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, exceptions
 from datetime import timedelta
 
 
@@ -31,10 +31,11 @@ class EstateProperty(models.Model):
     active = fields.Boolean(string="有效", default=True)
     state = fields.Selection(
         string="状态",
-        selection=[("available", "可售"), ("sold", "已售"), ("rented", "出租中")],
+        selection=[("available", "可售"), ("sold", "已售"), ("rented", "出租中"), ("cancel", "已取消")],
         default="available",
         copy=False,
         required=True,
+        readonly=True
     )
     property_type_id = fields.Many2one(string="类型", comodel_name="estate.property.type")
     owner_id = fields.Many2one(string="业主", comodel_name="res.partner")
@@ -75,6 +76,26 @@ class EstateProperty(models.Model):
                 'message': "卧室数量异常"
             }
             return {'warning': warning}
+
+    def do_sold(self):
+        """
+        将状态设置为已售
+        """
+        if self.state == "sold":
+            raise exceptions.UserError("该物业已售出")
+        else:
+            self.state = "sold"
+
+
+    def do_cancel(self):
+        """
+        将状态设置为已取消
+        """
+        if self.state == "cancel":
+            raise exceptions.UserError("该物业已取消")
+        else:
+            self.state = "cancel"
+
 
     # property_type = fields.Selection(
     #     string="类型",

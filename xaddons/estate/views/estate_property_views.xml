@@ -5,11 +5,16 @@
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <form string="Test">
+                <header name="header">
+                    <button name="do_sold" string="售出" type="object" class="btn-primary"/>
+                    <button name="do_cancel" string="取消" type="object" class="btn-danger"/>
+                </header>
                 <sheet>
                     <h1><field name="name" /></h1>
                     <field name="tag_id" widget="many2many_tags" />
                     <group>
                         <group>
+                            <field name="state" />
                             <field name="property_type_id" />
                             <field name="date_availability" />
                             <field name="total_area" />
