@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, exceptions
 from datetime import timedelta
 
 
@@ -30,3 +30,21 @@ class EstatePropertyOffer(models.Model):
 
     def _inverse_date_deadline(self):
         self.validity = (self.date_deadline - self.create_date.date()).days
+
+    def do_accept(self):
+        """
+        接受报价
+        """
+        if self.status == "draft" and self.search_count(domain=[("status", "=", "confirm"), ("property_id", "=", self.property_id.id)]) == 0:
+            self.status = "confirm"
+        else:
+            raise exceptions.UserError("报价状态不正确，无法接受！")
+
+    def do_cancel(self):
+        """
+        取消报价
+        """
+        if self.status == "draft":
+            self.status = "cancel"
+        else:
+            raise exceptions.UserError("报价状态不正确，无法取消！")

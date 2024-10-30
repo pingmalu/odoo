@@ -9,6 +9,8 @@
                 <field name="partner_id" />
                 <field name="validity" />
                 <field name="date_deadline" width="150" />
+                <button name="do_accept" type="object" icon="fa-check" string="接受" />
+                <button name="do_cancel" type="object" icon="fa-close" string="拒绝" />
                 <field name="status" />
             </list>
         </field>
