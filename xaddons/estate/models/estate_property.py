@@ -38,7 +38,7 @@ class EstateProperty(models.Model):
         readonly=True
     )
     property_type_id = fields.Many2one(string="类型", comodel_name="estate.property.type")
-    owner_id = fields.Many2one(string="业主", comodel_name="res.partner")
+    partner_id = fields.Many2one(string="买家", comodel_name="res.partner")
     sale_person_id = fields.Many2one(string="销售人员", comodel_name="res.users")
     tag_id = fields.Many2many(string="标签", comodel_name="estate.property.tag")
     offer_ids = fields.One2many(string="报价",inverse_name="property_id", comodel_name="estate.property.offer")

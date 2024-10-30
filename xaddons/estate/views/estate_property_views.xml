@@ -16,6 +16,7 @@
                         <group>
                             <field name="state" />
                             <field name="property_type_id" />
+                            <!-- <button name="%(estate.estate_property_type_action)d" string="类型" type="action" class="btn-primary"/> -->
                             <field name="date_availability" />
                             <field name="total_area" />
                         </group>
@@ -41,7 +42,7 @@
                         </page>
                         <page string="其他">
                             <group>
-                                <field name="owner_id" />
+                                <field name="partner_id" />
                                 <field name="sale_person_id" />
                             </group>
                         </page>

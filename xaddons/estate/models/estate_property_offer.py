@@ -37,6 +37,8 @@ class EstatePropertyOffer(models.Model):
         """
         if self.status == "draft" and self.search_count(domain=[("status", "=", "confirm"), ("property_id", "=", self.property_id.id)]) == 0:
             self.status = "confirm"
+            self.property_id.selling_price = self.price
+            self.property_id.partner_id = self.partner_id
         else:
             raise exceptions.UserError("报价状态不正确，无法接受！")
 
