@@ -56,7 +56,11 @@
         <field name="name">estate.property.list</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <list default_order="name desc">
+            <list default_order="name desc"
+                  decoration-muted="state == 'available'"
+                  decoration-success="state == 'sold'"
+                  decoration-danger="state == 'cancel'"
+            >
                 <field name="name" />
                 <field name="property_type_id" />
                 <field name="street" />
@@ -64,8 +68,8 @@
                 <field name="bedrooms" />
                 <field name="expected_price" />
                 <field name="living_area" />
-                <field name="garden" />
-                <field name="garden_orientation" />
+                <field name="garden" optional="hide" />
+                <field name="garden_orientation" optional="hide" />
             </list>
         </field>
     </record>
