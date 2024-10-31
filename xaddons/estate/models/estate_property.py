@@ -34,8 +34,8 @@ class EstateProperty(models.Model):
         selection=[("available", "可售"), ("sold", "已售"), ("rented", "出租中"), ("cancel", "已取消")],
         default="available",
         copy=False,
-        required=True,
-        readonly=True
+        required=True
+        # readonly=True
     )
     property_type_id = fields.Many2one(string="类型", comodel_name="estate.property.type")
     partner_id = fields.Many2one(string="买家", comodel_name="res.partner")
@@ -132,11 +132,11 @@ class EstateProperty(models.Model):
     #     "estate.sale", "property_id", string="售卖信息"
     # )
 
-    @api.constrains('expected_price','selling_price')
-    def _check_expected_price(self):
-        for record in self:
-            if record.expected_price * 0.9 > record.selling_price:
-                raise exceptions.ValidationError("销售价格不能低于期望价格的90%")
+    # @api.constrains('expected_price','selling_price')
+    # def _check_expected_price(self):
+    #     for record in self:
+    #         if record.expected_price * 0.9 > record.selling_price:
+    #             raise exceptions.ValidationError("销售价格不能低于期望价格的90%")
 
     def copy(self, default=None):
         default = dict(default or {})

@@ -6,8 +6,8 @@
         <field name="arch" type="xml">
             <form string="Test">
                 <header name="header">
-                    <button name="do_sold" string="售出" type="object" class="btn-primary"/>
-                    <button name="do_cancel" string="取消" type="object" class="btn-danger"/>
+                    <button name="do_sold" string="售出" type="object" class="btn-primary" invisible="state in ['sold', 'cancel']" />
+                    <button name="do_cancel" string="取消" type="object" class="btn-danger" invisible="state in ['sold', 'cancel']" />
                     <field name="state" widget="statusbar" statusbar_visible="available,sold,rented,cancel" statusbar_colors='{"available":"grey","sold":"blue","rented":"green","cancel":"red"}'/>
                 </header>
                 <sheet>
@@ -16,7 +16,7 @@
                     <group>
                         <group>
                             <field name="state" />
-                            <field name="property_type_id" />
+                            <field name="property_type_id" options="{'no_create': true, 'no_open': true}" />
                             <!-- <button name="%(estate.estate_property_type_action)d" string="类型" type="action" class="btn-primary"/> -->
                             <field name="date_availability" />
                             <field name="total_area" />
@@ -29,7 +29,7 @@
                     </group>
                     <notebook>
                         <page string="报价">
-                            <field name="offer_ids" />
+                            <field name="offer_ids" readonly="state in ['sold', 'cancel']" />
                         </page>
                         <page string="描述">
                             <group>
@@ -37,8 +37,8 @@
                                 <field name="bedrooms" />
                                 <field name="living_area" />
                                 <field name="garden" />
-                                <field name="garden_area" />
-                                <field name="garden_orientation" />
+                                <field name="garden_area" invisible="not garden" />
+                                <field name="garden_orientation" invisible="not garden" />
                             </group>
                         </page>
                         <page string="其他">
