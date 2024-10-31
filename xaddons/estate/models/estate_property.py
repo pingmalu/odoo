@@ -132,6 +132,12 @@ class EstateProperty(models.Model):
     #     "estate.sale", "property_id", string="售卖信息"
     # )
 
+    @api.constrains('expected_price','selling_price')
+    def _check_expected_price(self):
+        for record in self:
+            if record.expected_price * 0.9 > record.selling_price:
+                raise exceptions.ValidationError("销售价格不能低于期望价格的90%")
+
     def copy(self, default=None):
         default = dict(default or {})
         default["name"] = ("%s (copy)") % (self.name)
@@ -139,4 +145,8 @@ class EstateProperty(models.Model):
 
     _sql_constraints = [
         ('unique_name', 'UNIQUE(name)', '名称已存在'),
+        ('expected_price', 'CHECK(expected_price>=0)', '期望价格必须大于等于0'),
+        ('selling_price', 'CHECK(selling_price>=0)', '销售价格必须大于等于0'),
+        ('living_area', 'CHECK(living_area>=0)', '使用面积必须大于等于0'),
+        ('garden_area', 'CHECK(garden_area>=0)', '花园面积必须大于等于0'),
     ]
