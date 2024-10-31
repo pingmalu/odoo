@@ -3,8 +3,10 @@ from odoo import models, fields
 class EstatePropertyType(models.Model):
     _name = "estate.property.type"
     _description = "房屋类型"
+    _order = "sequence"
 
     name = fields.Char(string="房屋类型", required=True)
+    sequence = fields.Integer(string="排序",help="用于显示房屋类型时的顺序")
 
     def copy(self, default=None):
         default = dict(default or {})

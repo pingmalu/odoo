@@ -8,6 +8,7 @@
                 <header name="header">
                     <button name="do_sold" string="售出" type="object" class="btn-primary"/>
                     <button name="do_cancel" string="取消" type="object" class="btn-danger"/>
+                    <field name="state" widget="statusbar" statusbar_visible="available,sold,rented,cancel" statusbar_colors='{"available":"grey","sold":"blue","rented":"green","cancel":"red"}'/>
                 </header>
                 <sheet>
                     <h1><field name="name" /></h1>
@@ -55,7 +56,7 @@
         <field name="name">estate.property.list</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <list>
+            <list default_order="name desc">
                 <field name="name" />
                 <field name="property_type_id" />
                 <field name="street" />
