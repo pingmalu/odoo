@@ -5,6 +5,7 @@ class EstatePropertyTag(models.Model):
     _description = "标签"
 
     name = fields.Char(string="标签", required=True)
+    color = fields.Integer(string="颜色", default=1)
 
     def copy(self, default=None):
         default = dict(default or {})

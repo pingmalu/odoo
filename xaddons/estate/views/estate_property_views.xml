@@ -12,7 +12,7 @@
                 </header>
                 <sheet>
                     <h1><field name="name" /></h1>
-                    <field name="tag_id" widget="many2many_tags" />
+                    <field name="tag_id" widget="many2many_tags" options="{'color_field': 'color'}" />
                     <group>
                         <group>
                             <field name="state" />
@@ -64,7 +64,7 @@
                 <field name="name" />
                 <field name="property_type_id" />
                 <field name="street" />
-                <field name="tag_id" widget="many2many_tags" />
+                <field name="tag_id" widget="many2many_tags" options="{'color_field': 'color'}" />
                 <field name="bedrooms" />
                 <field name="expected_price" />
                 <field name="living_area" />
