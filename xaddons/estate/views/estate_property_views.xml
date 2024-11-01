@@ -86,6 +86,7 @@
                 <field name="garden" />
                 <field name="garden_orientation" />
                 <filter domain="[('bedrooms', '=', 3)]" name="bedrooms_3" string="三居室" />
+                <filter name="available" string="可售" domain="[('state', '=', 'available')]" help="可售的房产" />
                 <!-- <group expand="0" string="Group By...">
                     <filter string="类型" domain="[]" context="{'group_by': 'property_type_id'}" icon="terp-stock_symbol-selection" />
                     <filter string="标签" domain="[]" context="{'group_by': 'tag_id'}" icon="terp-stock_symbol-selection" />
@@ -97,5 +98,6 @@
         <field name="name">心心房产</field>
         <field name="res_model">estate.property</field>
         <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_available': 0}</field>
     </record>
 </odoo>
