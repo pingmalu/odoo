@@ -4,10 +4,7 @@
         <field name="name">estate.property.offer.list</field>
         <field name="model">estate.property.offer</field>
         <field name="arch" type="xml">
-            <list editable="bottom"
-                  decoration-success="status == 'confirm'"
-                  decoration-danger="status == 'cancel'"
-            >
+            <list editable="bottom" decoration-success="status == 'confirm'" decoration-danger="status == 'cancel'">
                 <field name="price" />
                 <field name="partner_id" />
                 <field name="validity" />
@@ -17,5 +14,11 @@
                 <field name="status" column_invisible="0" />
             </list>
         </field>
+    </record>
+    <record id="estate_property_offer_action" model="ir.actions.act_window">
+        <field name="name">房源报价</field>
+        <field name="res_model">estate.property.offer</field>
+        <field name="view_mode">list</field>
+        <field name="domain">[('property_type_id', '=', active_id)]</field>
     </record>
 </odoo>
