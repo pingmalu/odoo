@@ -31,7 +31,7 @@ class EstateProperty(models.Model):
     active = fields.Boolean(string="有效", default=True)
     state = fields.Selection(
         string="状态",
-        selection=[("available", "可售"), ("sold", "已售"), ("rented", "出租中"), ("cancel", "已取消")],
+        selection=[("available", "可售"),("received","收到报价"), ("sold", "已售"), ("rented", "出租中"), ("cancel", "已取消")],
         default="available",
         copy=False,
         required=True
@@ -96,7 +96,12 @@ class EstateProperty(models.Model):
         else:
             self.state = "cancel"
 
-
+    @api.ondelete(at_uninstall=False)   
+    def _check_property_state(self):
+        for record in self:
+            if record.state not in ["available", "cancel"]:
+                raise exceptions.UserError("该物业已售出或已取消，无法删除！")
+        
     # property_type = fields.Selection(
     #     string="类型",
     #     selection=[

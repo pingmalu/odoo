@@ -1,5 +1,8 @@
+from typing import Any
 from odoo import models, fields, api, exceptions
 from datetime import timedelta
+
+from odoo.api import ValuesType
 
 
 class EstatePropertyOffer(models.Model):
@@ -51,3 +54,15 @@ class EstatePropertyOffer(models.Model):
             self.status = "cancel"
         else:
             raise exceptions.UserError("报价状态不正确，无法取消！")
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            offers = self.search(domain=[("property_id", "=", vals["property_id"])])
+            price = vals.get("price")
+            if offers and price < max(offers.mapped("price")):
+                raise exceptions.UserError("已有更低报价，请不要重复报价！")
+            property = self.env["estate.property"].browse(vals["property_id"])
+            if property.state=="available":
+                property.state="received"
+        return super().create(vals_list)
