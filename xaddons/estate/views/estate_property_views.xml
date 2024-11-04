@@ -29,7 +29,8 @@
                     </group>
                     <notebook>
                         <page string="报价">
-                            <field name="offer_ids" readonly="state in ['sold', 'cancel']" />
+                            <!-- <field name="offer_ids" readonly="state in ['sold', 'cancel']" /> -->
+                            <field name="offer_ids" />
                         </page>
                         <page string="描述">
                             <group>
