@@ -95,10 +95,35 @@
             </search>
         </field>
     </record>
+    <record id="estate_property_view_kanban" model="ir.ui.view">
+        <field name="name">estate.property.kanban</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="property_type_id" records_draggable="true">
+                <field name="state"/>
+                <template>
+                    <t t-name="kanban-box">
+                        <div class="o_kanban_card">
+                            <field name="name"/>
+                            <div class="o_kanban_card_content">
+                                <field name="property_type_id"/>
+                            </div>
+                            <div class="o_kanban_footer">
+                                <span class="badge text-bg-success" t-if="record.state.raw_value == 'sold'">已售</span>
+                                <span class="badge text-bg-danger" t-if="record.state.raw_value == 'cancel'">已取消</span>
+                                <span class="badge text-bg-secondary" t-if="record.state.raw_value == 'available'">可用</span>
+                            </div>
+                        </div>
+                    </t>
+                </template>
+            </kanban>
+        </field>
+    </record>
+
     <record id="estate_property_action" model="ir.actions.act_window">
         <field name="name">心心房产</field>
         <field name="res_model">estate.property</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">list,form,kanban</field>
         <field name="context">{'search_default_available': 0}</field>
     </record>
 </odoo>
